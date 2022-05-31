@@ -28,10 +28,8 @@
  //==============distance====================
 const distref = ref(db,'test/Dist');
 var distance;
-var max = 0;
 onValue(distref, (snapshot) => {
   distance = snapshot.val();
-  if (distance > max) max = distance;
   updateWater(distance);
 });
 
@@ -95,34 +93,42 @@ function showDay(light){
     }
 }
 
-function setWater(dist) {
-  const distance = dist/10; //to cm
-  if (distance < 15) {
-    document.getElementById('water').style.backgroundColor = '#F24A72';
-    document.getElementById('water').style.borderColor = '#990000';
-    document.getElementById("distance").color = '#EAEA7F';
-    document.getElementById("distance").innerHTML = (max - distance).toFixed(1) + " cm";
-    var blink_speed = 500; // every 1000 == 1 second, adjust to suit
-    var t = setInterval(function () {
-    var ele = document.getElementById('distance');
+var blink = false;
+var blink_speed = 500; // every 1000 == 1 second, adjust to suit
+var t = setInterval(function () {
+  var ele = document.getElementById('distance');  
+  if (blink) {
     ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden');
-    }, blink_speed);
-    
-  } else { 
-    if (brightness < 0) return;
-    if (brightness >= 2500){
-      document.getElementById('water').style.backgroundColor = '#FFECDA';
-      document.getElementById('water').style.borderColor = '#D4A5A5';
-    }
-    if (light < 1300) {
-      document.getElementById('water').style.backgroundColor = '#F1EEE9';
-      document.getElementById('water').style.borderColor = '#73777B';
-    }
-    document.getElementById("distance").innerHTML = (max - distance).toFixed(1) + " cm";}
-    document.getElementById("wave").style.top = dist + "px";
+    document.getElementById('water').style.backgroundColor = '#F24A72';
+    document.getElementById('water').style.borderColor = '#B22727';
+      //document.getElementById("distance").color = '#EAEA7F';
+  } else {
+    ele.style.visibility = '';
   }
-  
 
+}, blink_speed);
+
+const threshold = 15;
+function setWater(dist) {
+    const distance = dist/10; //to cm
+    var depth = 60 - distance;
+    if (distance > 60) depth = 0;
+    console.log(depth);
+    document.getElementById('water').style.backgroundColor = '#FFECDA';
+    document.getElementById('water').style.borderColor = '#D4A5A5';
+    document.getElementById("distance").color = '#EAEA7F';
+    document.getElementById("distance").innerHTML = depth.toFixed(1) + " cm";
+    document.getElementById("wave").style.top = dist + "px";
+
+    if (distance <= threshold) {
+      //document.getElementById('water').style.backgroundColor = '#F24A72';
+      //document.getElementById('water').style.borderColor = '#B22727';
+      //document.getElementById("distance").color = '#EAEA7F';
+      blink = true;
+    }
+    if (distance > threshold + 5) blink = false;
+}
+  
 var rising = true;
 var current = 10000;
 
