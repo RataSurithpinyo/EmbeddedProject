@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>เครื่องวัดระดับน้ำสูงเท่าไหร่ก็ได้</title> 
+</head>
+
+<body>
+  <div id="texts">
+    <div class="head"> 
+      <h1 class="header", id="head">Embedded System - Final Project</h1>
+      <h4 class="names", id="name">Pachara Boonsarngsuk / Matt Yongpiyakul / Rata Surithpinyo / Watcharavit Tangsasom </h4>
+    </div>
+    <div class="box",id="box">
+      <section class="day", id="day">
+        <div class="pic"><img id="daypic" src="./pics/sun.png" width="100" height="100"></div>
+        <div class="daytime">
+          <p1 id="light"></p1>
+        </div>
+        <!--<div class="daytext">
+          <p1>Brightness value from LDR</p1>
+        </div>-->
+      </section>
+      <section class="water", id="water">
+        <div class="pic"><img src="./pics/water.png" width="90" height="90"></div>
+        <div class="dis">
+          <p1 id="distance">distance</p1>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="animate" id = "wave">
+    <div id = curve class="curve"></div>
+    <div class="bg"></div>
+  </div>
+  <script type="module" src="./app.js">
+    
+
+/*var state = 0;
+
+function testcase() {
+  switch (state) {
+    case 0:
+      showDay(900);
+      break;
+    case 2:
+      showDay(2000);
+      break;
+    default:
+      showDay(3500);
+      break;
+  }
+  state = (state + 1)%4;
+}*/
+  </script>
+
+</body>
+</html>
